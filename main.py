@@ -15,22 +15,22 @@ def print_menu() -> None:
     print("6. Exit")
     
 def main() -> None:
-    students: list[dict] = [] #List to contain student
+    workers: list[dict] = [] #List to contain worker
     while True:
         print_menu()
         choice: str = input("Chose an option (1-6): ").strip()
         #Match-case is only available in Python 3.10 
         match choice:
             case "1":
-                register_worker(students)
+                add_worker(workers)
             case "2":
-                print("Listing students and results...")
+                print("Register as Client")
             case "3":
-                print("Searching student by id...")
+                print("Post a Job")
             case "4":
-                print("Deleting student by id...")
+                print("View Open Jobs")
             case "5":
-                print("Exporting results to CSV...")
+                print("Apply to a Job")
             case "6":
                 print("Exiting the program. Goodbye!")    
                 break
