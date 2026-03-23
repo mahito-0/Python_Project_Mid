@@ -1,0 +1,13 @@
+[
+    {
+        "worker_id": "1",
+        "worker_name": "Mahmud",
+        "worker_skills": [
+            "WebDev"
+        ],
+        "worker_experience": "2",
+        "worker_location": "Dhaka",
+        "worker_rate": 1000.0,
+        "worker_status": "Online"
+    }
+]

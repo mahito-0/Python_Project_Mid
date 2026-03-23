@@ -3,7 +3,9 @@ This is a CLI version of Shobkaaj.
 '''
 from __future__ import annotations
 from models.worker import add_worker
+from utils.file_handler import load_data, save_data
 
+WORKERS_FILE = "data/workers.json"
 
 def print_menu() -> None:
     print("\n=== Shobkaaj Platform ===")
@@ -15,7 +17,7 @@ def print_menu() -> None:
     print("6. Exit")
     
 def main() -> None:
-    workers: list[dict] = [] #List to contain worker
+    workers: list[dict] = load_data(WORKERS_FILE, []) #List to contain worker
     while True:
         print_menu()
         choice: str = input("Chose an option (1-6): ").strip()
@@ -23,6 +25,8 @@ def main() -> None:
         match choice:
             case "1":
                 add_worker(workers)
+                save_data(WORKERS_FILE, workers)
+                print("\nWorker registered and saved successfully!")
             case "2":
                 print("Register as Client")
             case "3":
