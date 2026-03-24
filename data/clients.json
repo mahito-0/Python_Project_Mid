@@ -1,0 +1,10 @@
+[
+    {
+        "client_id": "1",
+        "client_name": "Mahmud",
+        "company_name": "2",
+        "company_location": "Dhaka",
+        "company_rate": 10000.0,
+        "company_status": "online"
+    }
+]

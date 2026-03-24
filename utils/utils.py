@@ -44,3 +44,13 @@ def prompt_float(prompt: str, min_val: float = 0.0, max_val: float | None = None
             continue
         return val
     
+def prompt_str(prompt: str) -> str:
+    while True:
+        raw = input(prompt).strip()
+        if not raw:
+            print("Input cannot be empty. Please try again.")
+            continue
+        if not raw.replace(" ", "").isalpha():
+            print("Only string input is allowed. Please try again.")
+            continue
+        return raw

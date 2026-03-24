@@ -2,7 +2,7 @@
 This module contains functions for processing worker data.
 """
 from __future__ import annotations
-from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float
+from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float, prompt_str
    
 class Worker:
     def __init__(self, worker_id: str, worker_name: str, worker_skills: list[str], worker_experience: str, worker_location: str, worker_rate: float, worker_status: str) -> None:
@@ -26,8 +26,8 @@ class Worker:
         }
 
 def add_worker(workers: list[dict]) -> None:
-    worker_id = prompt_on_empty("Enter worker ID: ")
-    worker_name = clean_name(prompt_on_empty("Enter worker name: "))
+    worker_id = str(prompt_int("Enter worker ID: "))
+    worker_name = clean_name(prompt_str("Enter worker name: "))
     
     skills_input = prompt_on_empty("Enter worker skills (comma-separated): ")
     worker_skills = [s.strip() for s in skills_input.split(",") if s.strip()]
