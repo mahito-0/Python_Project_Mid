@@ -5,7 +5,7 @@ from typing import Any
 from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float, prompt_str
 
 class Job:
-    def _init_(self, job_id: str, job_title: str, job_description: str, job_location: str, job_rate: float, job_status: str) -> None:
+    def __init__(self, job_id: str, job_title: str, job_description: str, job_location: str, job_rate: float, job_status: str) -> None:
         self.job_id = job_id
         self.job_title = job_title
         self.job_description = job_description
@@ -63,3 +63,99 @@ def view_open_jobs(jobs: list[dict]) -> None:
         console.print(table)
     else:
         console.print("\n[bold yellow]No open jobs found.[/bold yellow]")
+
+def update_job(jobs: list[dict]) -> None:
+    from rich.console import Console
+    console = Console()
+    
+    job_id = str(prompt_int("Enter job ID to update: "))
+    for job in jobs:
+        if job["job_id"] == job_id:
+            console.print(f"\n[bold green]Editing Job: {job['job_title']}[/bold green]")
+            
+            new_title = console.input(f"Enter new title (current: {job['job_title']}) [leave empty to keep current]: ").strip()
+            if new_title:
+                if not new_title.replace(" ", "").isalpha():
+                    console.print("[bold red]Only string input is allowed. Kept previous value.[/bold red]")
+                else:
+                    job['job_title'] = clean_name(new_title)
+            
+            new_desc = console.input(f"Enter new description (current: {job['job_description']}) [leave empty to keep current]: ").strip()
+            if new_desc:
+                job['job_description'] = new_desc
+
+            new_location = console.input(f"Enter new location (current: {job['job_location']}) [leave empty to keep current]: ").strip()
+            if new_location:
+                job['job_location'] = new_location
+
+            new_rate = console.input(f"Enter new rate (current: {job['job_rate']}) [leave empty to keep current]: ").strip()
+            if new_rate:
+                try:
+                    val = float(new_rate)
+                    if val < 0.0:
+                        console.print("[bold red]Rate must be >= 0. Kept previous value.[/bold red]")
+                    else:
+                        job['job_rate'] = val
+                except ValueError:
+                    console.print("[bold red]Invalid rate format. Kept previous value.[/bold red]")
+
+            new_status = console.input(f"Enter new status (current: {job['job_status']}) [leave empty to keep current]: ").strip()
+            if new_status:
+                job['job_status'] = clean_name(new_status)
+                
+            console.print("\n[bold green]✔ Job updated successfully![/bold green]")
+            return
+            
+    console.print("\n[bold red]Job not found.[/bold red]")
+
+def delete_job(jobs: list[dict]) -> None:
+    from rich.console import Console
+    console = Console()
+    
+    job_id = str(prompt_int("Enter job ID to delete: "))
+    for i, job in enumerate(jobs):
+        if job["job_id"] == job_id:
+            removed_job = jobs.pop(i)
+            console.print(f"\n[bold green]✔ Job '{removed_job['job_title']}' deleted successfully![/bold green]")
+            return
+            
+    console.print("\n[bold red]Job not found.[/bold red]")
+
+def manage_jobs(jobs: list[dict]) -> None:
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.text import Text
+    from utils.file_handler import save_data
+    console = Console()
+    JOBS_FILE = "data/jobs.json"
+    
+    while True:
+        menu_text = Text()
+        menu_text.append("1. Post a Job\n", style="green")
+        menu_text.append("2. View Open Jobs\n", style="green")
+        menu_text.append("3. Update a Job\n", style="green")
+        menu_text.append("4. Delete a Job\n", style="green")
+        menu_text.append("5. Back to Main Menu", style="yellow")
+        
+        panel = Panel(menu_text, title="[bold magenta]--- Manage Jobs ---[/bold magenta]", expand=False, border_style="bold green")
+        console.print()
+        console.print(panel)
+        
+        choice = console.input("[bold cyan]Choose an option (1-5): [/bold cyan]").strip()
+        match choice:
+            case "1":
+                add_job(jobs)
+                save_data(JOBS_FILE, jobs)
+                console.print("\n[bold green]✔ Job posted and saved successfully![/bold green]")
+            case "2":
+                view_open_jobs(jobs)
+            case "3":
+                update_job(jobs)
+                save_data(JOBS_FILE, jobs)
+            case "4":
+                delete_job(jobs)
+                save_data(JOBS_FILE, jobs)
+            case "5":
+                break
+            case _:
+                console.print("[bold red] Invalid option. Please choose a number between 1 and 5.[/bold red]")

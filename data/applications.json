@@ -4,5 +4,11 @@
         "job_id": "2",
         "worker_id": "1",
         "application_status": "open"
+    },
+    {
+        "application_id": "2",
+        "job_id": "1",
+        "worker_id": "1",
+        "application_status": "open"
     }
 ]

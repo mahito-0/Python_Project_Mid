@@ -9,5 +9,16 @@
         "worker_location": "Dhaka",
         "worker_rate": 1000.0,
         "worker_status": "Online"
+    },
+    {
+        "worker_id": "2",
+        "worker_name": "Gazi",
+        "worker_skills": [
+            "None"
+        ],
+        "worker_experience": "1",
+        "worker_location": "Dhaka",
+        "worker_rate": 200.0,
+        "worker_status": "Online"
     }
 ]

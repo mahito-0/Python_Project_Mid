@@ -3,7 +3,7 @@ from typing import Any
 from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float, prompt_str
 
 class Application:
-    def _init_(self, application_id: str, job_id: str, worker_id: str, application_status: str) -> None:
+    def __init__(self, application_id: str, job_id: str, worker_id: str, application_status: str) -> None:
         self.application_id = application_id
         self.job_id = job_id
         self.worker_id = worker_id
