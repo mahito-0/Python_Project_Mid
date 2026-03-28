@@ -1,1 +1,8 @@
-[]
+[
+    {
+        "application_id": "1",
+        "job_id": "2",
+        "worker_id": "1",
+        "application_status": "open"
+    }
+]
