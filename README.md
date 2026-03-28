@@ -24,7 +24,7 @@ The application provides a fully interactive CLI menu with the following capabil
 
 1. **Clone the repository and navigate to the project directory:**
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/mahito-0/Python_Project_Mid.git
    cd Python_Project_Mid
    ```
 
