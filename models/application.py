@@ -1,5 +1,7 @@
 import json
 from typing import Any
+from rich.console import Console
+from rich.table import Table
 from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float, prompt_str
 
 class Application:
@@ -27,8 +29,6 @@ def add_application(applications: list[dict]) -> None:
     applications.append(application_obj.to_dict())
 
 def view_applications(applications: list[dict]) -> None:
-    from rich.console import Console
-    from rich.table import Table
 
     console = Console()
     table = Table(title="[bold blue]Applications[/bold blue]", show_lines=True)

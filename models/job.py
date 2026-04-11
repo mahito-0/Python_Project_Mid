@@ -1,6 +1,10 @@
 import json
 import os
 from typing import Any
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+from rich.table import Table
 
 from utils.utils import prompt_on_empty, clean_name, prompt_int, prompt_float, prompt_str
 
@@ -35,8 +39,6 @@ def add_job(jobs: list[dict]) -> None:
     jobs.append(job_obj.to_dict())
 
 def view_open_jobs(jobs: list[dict]) -> None:
-    from rich.console import Console
-    from rich.table import Table
     
     console = Console()
     table = Table(title="[bold green]Open Jobs[/bold green]", show_lines=True)
@@ -65,7 +67,6 @@ def view_open_jobs(jobs: list[dict]) -> None:
         console.print("\n[bold yellow]No open jobs found.[/bold yellow]")
 
 def update_job(jobs: list[dict]) -> None:
-    from rich.console import Console
     console = Console()
     
     job_id = str(prompt_int("Enter job ID to update: "))
@@ -82,7 +83,7 @@ def update_job(jobs: list[dict]) -> None:
             
             new_desc = console.input(f"Enter new description (current: {job['job_description']}) [leave empty to keep current]: ").strip()
             if new_desc:
-                job['job_description'] = new_desc
+                job['job_description'] = new_descd
 
             new_location = console.input(f"Enter new location (current: {job['job_location']}) [leave empty to keep current]: ").strip()
             if new_location:
@@ -109,7 +110,6 @@ def update_job(jobs: list[dict]) -> None:
     console.print("\n[bold red]Job not found.[/bold red]")
 
 def delete_job(jobs: list[dict]) -> None:
-    from rich.console import Console
     console = Console()
     
     job_id = str(prompt_int("Enter job ID to delete: "))
@@ -122,9 +122,7 @@ def delete_job(jobs: list[dict]) -> None:
     console.print("\n[bold red]Job not found.[/bold red]")
 
 def manage_jobs(jobs: list[dict]) -> None:
-    from rich.console import Console
-    from rich.panel import Panel
-    from rich.text import Text
+
     from utils.file_handler import save_data
     console = Console()
     JOBS_FILE = "data/jobs.json"

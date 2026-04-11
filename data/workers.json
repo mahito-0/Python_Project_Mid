@@ -20,5 +20,18 @@
         "worker_location": "Dhaka",
         "worker_rate": 200.0,
         "worker_status": "Online"
+    },
+    {
+        "worker_id": "87",
+        "worker_name": "Mn",
+        "worker_skills": [
+            "i",
+            "8",
+            "98"
+        ],
+        "worker_experience": "9",
+        "worker_location": "u",
+        "worker_rate": 670000000.0,
+        "worker_status": "online"
     }
 ]
